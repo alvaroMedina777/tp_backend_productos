@@ -1,0 +1,11 @@
+import { Router } from 'express';
+import { body, param } from 'express-validator';
+import { getCategories, addCategory, updateCategory, deleteCategory } from '../controllers/category.controller.js';
+import { authenticate, validarRolAdmin } from '../middlewares/auth.js';
+import { handleValidationErrors } from '../middlewares/validators.js';
+const router = Router();
+router.get('/', getCategories);
+router.post('/', [authenticate, validarRolAdmin, body('nombre').isString().trim().notEmpty(), handleValidationErrors], addCategory);
+router.put('/:id', [authenticate, validarRolAdmin, param('id').isMongoId(), body('nombre').isString().trim().notEmpty(), handleValidationErrors], updateCategory);
+router.delete('/:id', [authenticate, validarRolAdmin, param('id').isMongoId(), handleValidationErrors], deleteCategory);
+export default router;
