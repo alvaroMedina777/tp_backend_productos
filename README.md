@@ -1,42 +1,151 @@
-# TP Backend Productos
+# TP Backend Productos - API REST
 
-API REST de productos con Express, Mongoose, JWT y express-validator.
+## Descripción
 
-## Instalación
+Trabajo práctico del Módulo 3 de RollingCode School.
 
-1. `npm install`
-2. Copiar `.env.example` a `.env` y configurar MONGODB_URI y JWT_SECRET.
-3. `npm run dev` (desarrollo) o `npm start` (Render).
+Desarrollo de una API REST utilizando Node.js, Express y MongoDB, que permite administrar usuarios, categorías y productos.
+
+El proyecto incluye autenticación mediante JWT, validación de datos y operaciones CRUD. La base de datos se encuentra alojada en MongoDB Atlas y el servidor está desplegado en Render.
+
+## Tecnologías utilizadas
+
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- JavaScript (ES Modules)
+- JSON Web Token (JWT)
+- bcryptjs
+- express-validator
+- dotenv
+- CORS
+- Thunder Client
+- Git y GitHub
+- Render
+
+## Funcionalidades
+
+**Autenticación**
+- Registro de usuarios.
+- Inicio de sesión.
+- Generación y validación de tokens JWT.
+- Control de acceso mediante roles de usuario y administrador.
+
+**Categorías**
+- Listar categorías.
+- Crear categorías.
+- Actualizar categorías.
+- Eliminar categorías.
+
+**Productos**
+- Listar productos.
+- Crear productos.
+- Actualizar productos.
+- Eliminar productos mediante baja lógica.
+- Relacionar productos con categorías y usuarios.
 
 ## Endpoints
 
-| Método | Ruta | Autenticación |
+### Autenticación
+
+| Método | Endpoint | Descripción |
 |---|---|---|
-| POST | /api/auth/register | No |
-| POST | /api/auth/login | No |
-| GET | /api/categorias | No |
-| POST | /api/categorias | Administrador |
-| PUT | /api/categorias/:id | Administrador |
-| DELETE | /api/categorias/:id | Administrador |
-| GET | /api/productos?desde=0 | No |
-| POST | /api/productos | Bearer JWT |
-| PUT | /api/productos/:id | Bearer JWT |
-| DELETE | /api/productos/:id | Bearer JWT |
+| POST | `/api/auth/register` | Registrar usuario |
+| POST | `/api/auth/login` | Iniciar sesión |
 
-### Ejemplos JSON
+### Categorías
 
-Registro: `{"nombre":"Alumno","email":"alumno@example.com","password":"claveSegura123"}`
+| Método | Endpoint | Descripción |
+|---|---|---|
+| GET | `/api/categorias` | Obtener categorías |
+| POST | `/api/categorias` | Crear categoría |
+| PUT | `/api/categorias/:id` | Actualizar categoría |
+| DELETE | `/api/categorias/:id` | Eliminar categoría |
 
-Login: `{"email":"alumno@example.com","password":"claveSegura123"}`
+### Productos
 
-Categoría: `{"nombre":"Bicicletas"}`
+| Método | Endpoint | Descripción |
+|---|---|---|
+| GET | `/api/productos` | Obtener productos |
+| POST | `/api/productos` | Crear producto |
+| PUT | `/api/productos/:id` | Actualizar producto |
+| DELETE | `/api/productos/:id` | Eliminar producto |
 
-Producto: `{"nombre":"Bicicleta MTB","precio":120000,"categoria":"ID_DE_CATEGORIA","descripcion":"Rodado 29","disponible":true}`
+Las operaciones de creación, actualización y eliminación requieren autenticación JWT y permisos de administrador.
 
-El registro público asigna USER_ROLE. Para probar las rutas administrativas de categorías en desarrollo, crear un usuario de prueba y asignarle ADMIN_ROLE en MongoDB Compass/Atlas (solo en la base de desarrollo). Volver a iniciar sesión para probar.
+## Instalación local
 
-## Render
+**1. Clonar el repositorio**
 
-Crear un Web Service desde el repositorio GitHub. Build command: `npm install`; Start command: `npm start`. Variables de entorno: `MONGODB_URI` (Atlas), `JWT_SECRET` (valor secreto largo) y opcional `PORT` (Render lo establece automáticamente). Configurar el acceso de red de Atlas para permitir conexiones desde Render, siguiendo sus controles de seguridad.
+```bash
+git clone https://github.com/alvaroMedina777/tp_backend_productos.git
+```
 
-No publicar `.env`, contraseñas ni cadenas de conexión con credenciales.
+**2. Ingresar al proyecto**
+
+```bash
+cd tp_backend_productos
+```
+
+**3. Instalar dependencias**
+
+```bash
+npm install
+```
+
+**4. Configurar variables de entorno**
+
+Crear un archivo `.env` en la raíz del proyecto con las siguientes variables:
+
+```env
+PORT=3000
+MONGODB_URI=TU_CADENA_DE_CONEXION_MONGODB_ATLAS
+JWT_SECRET=TU_CLAVE_SECRETA_SEGURA
+```
+
+Los valores reales deben mantenerse privados y no deben subirse a GitHub.
+
+**5. Iniciar el servidor**
+
+Para desarrollo:
+
+```bash
+npm run dev
+```
+
+Para ejecución normal:
+
+```bash
+npm start
+```
+
+## Despliegue
+
+La API se encuentra publicada en Render y utiliza MongoDB Atlas como base de datos.
+
+**URL pública:**
+
+https://tp-backend-productos.onrender.com
+
+**Endpoint para consultar productos:**
+
+https://tp-backend-productos.onrender.com/api/productos
+
+El servicio utiliza el plan gratuito de Render, por lo que puede tardar unos segundos en responder después de un período de inactividad.
+
+## Pruebas y evidencias
+
+Las rutas fueron probadas utilizando Thunder Client, verificando las respuestas HTTP correspondientes a las operaciones de autenticación y CRUD.
+
+Las capturas de las pruebas se encuentran en la carpeta `evidencias/` del repositorio.
+
+## Repositorio
+
+https://github.com/alvaroMedina777/tp_backend_productos
+
+## Autor
+
+Álvaro Medina
+
+RollingCode School - Módulo 3
