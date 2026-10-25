@@ -9,9 +9,16 @@ export const registrar = async (req, res) => {
     const user = await User.create({ nombre, email: normalizado, password: await bcrypt.hash(password, 10) });
     res.status(201).json({ usuario: { id: user.id, nombre: user.nombre, email: user.email, rol: user.rol } });
   } catch (e) {
-    if (e.code === 11000) return res.status(409).json({ mensaje: 'Email registrado' });
-    res.status(500).json({ mensaje: 'No se pudo registrar' });
+  console.error("Error al registrar usuario:", e);
+
+  if (e.code === 11000) {
+    return res.status(409).json({ mensaje: "Email registrado" });
   }
+
+  return res.status(500).json({
+    mensaje: "No se pudo registrar"
+  });
+}
 };
 export const login = async (req, res) => {
   try {

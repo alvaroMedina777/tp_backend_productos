@@ -1,3 +1,4 @@
+import dns from "node:dns";
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
@@ -5,6 +6,8 @@ import { conectarDB } from './src/config/database.js';
 import authRoutes from './src/routes/auth.routes.js';
 import categoryRoutes from './src/routes/category.routes.js';
 import productRoutes from './src/routes/product.routes.js';
+
+dns.setServers(["8.8.8.8"]);
 
 const app = express();
 app.use(cors());
