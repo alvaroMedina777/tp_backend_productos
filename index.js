@@ -7,8 +7,9 @@ import authRoutes from './src/routes/auth.routes.js';
 import categoryRoutes from './src/routes/category.routes.js';
 import productRoutes from './src/routes/product.routes.js';
 
-dns.setServers(["8.8.8.8"]);
-
+if (process.env.NODE_ENV !== "production") {
+  dns.setServers(["8.8.8.8"]);
+}
 const app = express();
 app.use(cors());
 app.use(express.json());
